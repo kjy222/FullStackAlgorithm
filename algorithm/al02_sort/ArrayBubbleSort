@@ -1,0 +1,46 @@
+package al02_sort;
+
+import java.util.Arrays;
+import java.util.Random;
+
+public class ArrayBubbleSort {
+	
+	public static void swap(int a[], int idx1, int idx2) {
+		int temp = a[idx1];
+		a[idx1] = a[idx2];
+		a[idx2] = temp;
+	}
+	
+	// ���� ����: ��������		������ �迭, ������ ��(10) // �޼ҵ� �߿�
+	public static void mySort(int a[], int n) {
+		for(int i=0; i<n-1; i++) { //i=0,1,2,3,4,....
+			//		   9
+			for(int j=n-1; j>0; j-- ) { // j=9
+				// 	  8		  9
+				if(a[j-1] > a[j]) {
+					// ��ȯ
+					// 		 8	 9
+					swap(a, j-1, j);
+				}
+			}
+			// System.out.println("1������ : " + Arrays.toString(a)); // ���� ���� ���� ������
+		}
+	}
+
+	public static void main(String[] args) {
+		Random ran = new Random();
+		// ������ �غ�
+		// 1~100������ ������ �����Ͽ� ũ������� ����(��������)
+
+		int arr[] = new int[10];
+		
+		for(int i=0; i<arr.length; i++) {
+			arr[i] = ran.nextInt(100); // 0~99
+		}
+		System.out.println("������: " + Arrays.toString(arr));
+		
+		mySort(arr, arr.length);
+		System.out.println("1������ : " + Arrays.toString(arr));
+	}
+
+}
