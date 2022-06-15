@@ -1,0 +1,50 @@
+package test;
+
+import java.util.Arrays;
+import java.util.Scanner;
+
+// 1204��
+public class Solution01 {
+
+	public static void main(String[] args) {
+		Scanner sc= new Scanner(System.in);
+		// �׷��
+		int cnt = Integer.parseInt(sc.nextLine());
+		for(int i=1; i<cnt; i++) {
+			int num = Integer.parseInt(sc.nextLine());// �׷��ȣ
+			int[] scoreCnt = new int[101];
+			
+			String inStr[] = sc.nextLine().split(" ");
+			
+			// ���ڿ� �迭�� ���� �迭�� �����Ѵ�
+			int inData[] = Arrays.stream(inStr).mapToInt(Integer::parseInt).toArray();
+			for(int j=0; j<inData.length;j++) {
+				// j��° �ִ� ���� index�� ����ϴ� ī�����Ѵ�.
+				// scoreCnt[inData[j]] += 1;
+				// scoreCnt[inData[j]]++;
+				// ++scoreCnt[inData[j]];
+				// �� �� �߿� �ϳ� ����ϸ� ��
+			}
+			// ���� ū ���� ����ִ� (index=����)�� ���Ѵ�.
+			int maxIndex = 0;
+			for(int k=0; k<scoreCnt.length; k++) {
+				if(scoreCnt[maxIndex] < scoreCnt[k]) {
+					maxIndex = k;
+				}
+			}
+			System.out.println("#" + num + " " + maxIndex);
+			
+		}
+		// �̿ϼ� �� �ڵ�
+//		Scanner sc= new Scanner(System.in);
+//		int num = Integer.parseInt(sc.nextLine());
+//		String data[] = sc.nextLine().split(" ");
+//		String score[] = new String[num];
+//		
+//		// ���
+//		for(int i=1; i<=num; i++) { 
+//			System.out.println("#" + i + " ");
+//		}
+	}
+
+}
