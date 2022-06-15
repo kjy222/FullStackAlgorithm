@@ -1,0 +1,70 @@
+package al03_stack_queue;
+
+import java.util.Scanner;
+
+public class IntQueueMain {
+
+	static Scanner sc = new Scanner(System.in);
+	// �޴��� �Է¹޴� �޼ҵ�
+	static String getMenu() {
+		// 3/�̸� ���� ���� ���� ���Ͽ� ��� 
+		// 4. ť�� ũ��, �������� ��, front,rear���ؽ�, ó����, ������ ���� ���϶�
+		System.out.println("[menu] 1. enqueue, 2. dequeue, 3. peek, 4. info, 9. end");
+		return sc.nextLine();
+	}
+	
+	public static void main(String[] args) {
+		
+		IntQueue queue = new IntQueue(10);
+		
+		while(true) {
+			String menu = getMenu();
+			if(menu.equals("9")) { // 9.end ���ý�
+				break;
+			} else { // �� �� �޴� ���ý�
+				switch(menu) {
+					case "1": // ť�� �����͸� �߰��Ѵ�
+						System.out.print("ť�� �߰��� ������ : ");
+						int data = Integer.parseInt(sc.nextLine());
+						try {
+							// int result = queue.enqueue(data);
+						} catch(Exception e) {
+							System.out.println("ť�� ����á����ϴ�.");
+						}
+						break;
+					case "2": // ť�� ������ ���դ���*��� ����)
+						try { 
+							int result = queue.dequeue();
+							System.out.println("ť���� ������ ������ ->s " + result);
+						} catch(Exception e) {
+							System.out.println("ť�� ��� �ֽ��ϴ�.");
+						}
+						break;
+					case "3": // ���� �տ� �ִ� ��ü ������
+						try {
+							int result = queue.peek();
+							System.out.println("ť�� ���� �� ������ -> " + result);
+						} catch(Exception e) {
+							System.out.println("ť�� ����ֽ��ϴ�.");
+						}
+						break;
+					case "4":
+						System.out.println("ť�� ũ��-> " + queue.getCapacity());
+						System.out.println("�������� ��-> " + queue.getSize());
+						System.out.println("front-> " + queue.getFrontIndex());
+						System.out.println("rear-> " + queue.getRearIndex());
+						System.out.println("ó����-> " + queue.peek());
+						System.out.println("��������-> " + queue.getRearData());
+						
+						break;
+					case "5":
+						break;
+					default:
+						System.out.println("�޴��� �߸� �����Ͽ����ϴ�.");
+				}
+			}
+		}
+		System.out.println("���α׷��� ����Ǿ����ϴ�.");
+	}
+
+}
