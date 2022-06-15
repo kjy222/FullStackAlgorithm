@@ -1,0 +1,70 @@
+
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+
+public class InsertTest {
+	
+	Connection con =null;
+	PreparedStatement pstmt = null;
+	
+	public InsertTest() {
+		
+	}
+	public void empInsert() {
+		// �����ȣ, �̸�, �޿�, �Ի����� ���ڵ忡 �߰��ϱ�
+		try {
+			// 1. ����̺� �ε�
+			Class.forName("com.mysql.cj.jdbc.Driver");
+			
+			// 2. DB ����									server/dbname					
+			con = DriverManager.getConnection("jdbc:mysql://127.0.0.1/demo", "root","root1234");
+			con.setAutoCommit(false);
+			// 3. preparedStatement ��ü ���� : ������ ����ؼ�
+			// ���ڿ��� �����ȣ, �̸�, �޿�, �Ի����� �� �� �ִ� ������ �����
+			// �����ȣ : 5555, �̸� : kim, �޿� : 4500, �Ի��� : ���� ��¥�� �ð����� ����
+			String sql = "insert into emp(empno, ename, sal, hiredate) values(?, ?, ?, now())";
+			pstmt = con.prepareStatement(sql);
+			// ?�� ���� �����Ѵ�.
+			pstmt.setInt(1, 0);
+			pstmt.setString(2, "kim");
+			pstmt.setDouble(3, 3500);
+			
+			// 4.����
+			// �������� �����Ͽ� �߰��� ���ڵ��� ���� ��ȯ�Ѵ�.
+			int cnt = pstmt.executeUpdate();
+			
+			if(cnt > 0) {
+				System.out.println("���ڵ尡 �߰� �Ǿ����ϴ�.");
+			} else {
+				System.out.println("���ڵ� �߰� �����Ͽ����ϴ�.");
+			}
+			
+			
+		} catch (Exception e) {
+			try {
+				con.rollback();
+			} catch(Exception ee) {
+				
+			}
+			e.printStackTrace();
+		} finally {
+			try {
+				con.commit();
+				if(pstmt != null) {
+					pstmt.close();
+				}
+				if(con != null) {
+					con.close();
+				}
+			} catch(Exception e2) {
+				e2.printStackTrace();
+			} 
+		}
+	}
+	public static void main(String[] args) {
+		new InsertTest().empInsert();
+	}
+
+}
