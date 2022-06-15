@@ -1,0 +1,94 @@
+package al03_stack_queue;
+
+public class IntQueue {
+
+	int capacity; // ť�� ũ��
+	int queue[]; // ť�� �޸𸮸� ����
+
+	// ���� : 0, �Ǽ� : 0.0, ���� : false, ��ü�� : null
+	int front; // ���� �� ��ġ
+	int rear; // ������ ��ġ
+	int dataCnt; // queue�� ������ ����
+	public IntQueue() {	}
+	public IntQueue(int capacity) {
+		this.capacity = capacity;
+		queue = new int[capacity];
+		
+		// �ʱⰪ�� �൵ ������ ���� �� �൵ �ȴ�
+		// ��?? ��������� �ڵ����� �ʱ�ȭ 
+//		front = 0;
+//		rear = 0;
+//		dataCnt = 0;
+		// front=rear=dataCnt=0;
+				
+	}
+	
+	// ť�� �����͸� �߰��ϴ� �޼ҵ�
+	public enqueue(int data) throws QueueOverFlowExeption {
+		// �����Ͱ� ���� á���� Ȯ��
+		// capacity : �뷮, dataCnt : ���� ������ ��
+		if(capacity <= dataCnt) { // overflow �߻�
+			throw new QueueOverFlowException();
+		}
+		// �����͸� ť�� ��´�(rear : ��ġ��)
+		queue[rear] = data;
+		dataCnt++;// �������� �� ����
+		return data;
+
+	}
+	// ť���� �����͸� ������ �޼ҵ�
+	public int dequeue() throws QueueEmptyException {
+		if(dataCnt<=0) {
+			throw new QueueEmptyException();
+		}
+		// ť�� �����Ͱ� ���� �� �����
+		int deData =queue[front++];//dataCnt--;d// ���� ��ü�� ���� 1����
+		if(front==capacity)
+			front =0 ;
+		return deData; //return queue[front++];
+	}
+	
+		// ť�� �����Ͱ� ���� �� �����.
+		dataCnt--; //���� ��ü�� ���� 1����
+		int deData = queue[front++];
+		if(fron==capacity)
+			front = 0;
+		System.out.println("front-> " + front);
+		return deData;
+
+	
+	// ť�� ���Ͼ�(front) �����͸� ���Ѵ�.
+	public int peek() throws QueueEmptyException {
+		if(dataCnt<=0) {
+			throw new QueueEmptyException();
+		}
+		return queue[front];
+	}
+	// ť�� ũ�� 
+	public int getCapacity() {
+		return capacity;
+	}
+	// ť�� ������ ��
+	public int getSize(){
+		return dataCnt;
+	}
+	// front Index
+	public int getFrontIndex() {
+		return front;
+	}
+	public int getRearIndex() {
+		return rear;
+	}
+	// ������ ��
+	public int getRearData() {
+		return queue[rear-1];
+	}
+	// ť�� ��������� Empty ���� Ŭ����
+	class QueueEmptyException extends RuntimeException {
+		QueueEmptyException(){};
+	}
+	// overflow �߻��� ó���� ����
+	class QueueOverFlowException extends RuntimeException {
+		QueueOverFlowException(){}
+	}
+}
