@@ -1,0 +1,72 @@
+package al02_sort;
+
+import java.util.Arrays;
+import java.util.Scanner;
+
+public class QuickSortEx {
+	public static void swap(int a[], int idx1, int idx2) {
+		int temp = a[idx1];
+		a[idx1] = a[idx2];
+		a[idx2] = temp;
+	}
+	// ��������, ��������
+	public static void myQuickDesc(int a[], int left, int right) {
+		int pl = left; 
+		int pr = right; 
+		int pivot = a[(left+right)/2]; 
+		
+		do {
+			while(a[pl] > pivot) {
+				pl++;
+			}
+			while(a[pr] < pivot) {
+				pr--;
+			}
+			if(pl <= pr ) { 
+				swap(a, pl++, pr--);
+			}
+		} while(pl <= pr);
+		
+		if(left<pr) myQuickDesc(a, left, pr);
+		if(pl<right) myQuickDesc(a, pl, right);
+	}
+	
+	public static void main(String[] args) {
+		Scanner sc = new Scanner(System.in);
+		
+		System.out.print("���� ������ ����: ");
+		int cnt = sc.nextInt();
+		
+		int arr[] = new int[cnt]; // �迭�� ����
+		
+		for(int i=0; i<arr.length; i++) {
+			System.out.print("���� ����" + (i + 1) + ": ");
+			arr[i] = sc.nextInt();
+		}
+		
+		myQuickDesc(arr, 0, cnt-1); // �������Ѵ�.
+		
+		for(int i=1; i<=cnt; i++) {
+			System.out.println(i + "��: " + arr[i-1]);
+		}
+	}
+}
+
+/*
+ * ���������� �Է¹޾� ���������� ����϶�
+ * �������� �̿��϶�
+ * 
+ * ���������� ��: 5
+ * ��������1 : 56
+ * ��������2 : 92
+ * ��������3 : 95
+ * ��������4 : 85
+ * ��������5 : 56
+ * 
+ * ���������� ���
+ * 1��: 95
+ * 2��: 92
+ * 3��: 85
+ * 4��: 56 
+ * 5��: 56
+ */
